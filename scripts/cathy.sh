@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Toggle Cathy: on | off | status. Writes only the mode file. No network.
+# Toggle Cathy: on | always | off | status. Writes only the mode file. No network.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -11,7 +11,7 @@ current_mode() {
   local m
   m="$(cat "$STATE_FILE" 2>/dev/null || true)"
   [ -n "$m" ] || m="${CATHY_DEFAULT_MODE:-off}"
-  [ "$m" = "on" ] && echo on || echo off
+  case "$m" in on|always) echo "$m" ;; *) echo off ;; esac
 }
 
 cmd="${1:-status}"
@@ -21,9 +21,15 @@ case "$cmd" in
   on)
     mkdir -p "$STATE_DIR"
     printf 'on\n' > "$STATE_FILE"
-    echo "CATHY ON. Apply the foundation rules below for this session. WAR_ROOM specs and SOUL decisions override them. Turn off with /cathy:run off."
+    echo "CATHY ON. Keyword mode. The guard is active now. The foundation rules load once, when a prompt mentions a coding keyword or when a code file is first edited. The keywords are in rules/triggers.txt. Turn off with /cathy:run off."
+    ;;
+  always)
+    mkdir -p "$STATE_DIR"
+    printf 'always\n' > "$STATE_FILE"
+    echo "CATHY ALWAYS. The guard is active. Apply the foundation rules below for this session and at every session start. WAR_ROOM specs and SOUL decisions override them. Turn off with /cathy:run off."
     echo
-    cat "$RULES"
+    # Print the compact rules. Fall back to the full file if python3 is missing.
+    python3 -I "$ROOT/scripts/hook.py" core 2>/dev/null || cat "$RULES"
     ;;
   off)
     mkdir -p "$STATE_DIR"
@@ -34,7 +40,7 @@ case "$cmd" in
     echo "Cathy mode: $(current_mode)"
     ;;
   *)
-    echo "Usage: /cathy:run on|off|status" >&2
+    echo "Usage: /cathy:run on|always|off|status" >&2
     exit 2
     ;;
 esac

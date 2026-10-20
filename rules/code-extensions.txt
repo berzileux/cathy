@@ -1,0 +1,39 @@
+# One entry per line. Lines that start with # are comments.
+# The first edit of a file with one of these extensions or names loads the foundation
+# rules (mode "on"), even if the prompt had no keyword. Matching is case-insensitive.
+# Extensions start with a dot. Names are exact file names.
+.py
+.pyi
+.js
+.jsx
+.mjs
+.cjs
+.ts
+.tsx
+.go
+.cs
+.csproj
+.java
+.kt
+.rs
+.rb
+.php
+.pl
+.pm
+.c
+.h
+.cpp
+.hpp
+.swift
+.sql
+.sh
+.bash
+.ps1
+.tf
+.yml
+.yaml
+.vue
+.svelte
+Dockerfile
+Makefile
+Jenkinsfile

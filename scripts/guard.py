@@ -25,7 +25,7 @@ SEPARATORS = {";", "&&", "||", "|", "&", "(", ")", ";;", "|&"}
 
 # A Bash command that mentions these text fragments is blocked.
 # They protect Cathy's own switch and files from an agent edit.
-SELF_PROTECT = [".config/cathy", "cathy/mode", "cathy.sh", "inject.sh",
+SELF_PROTECT = [".config/cathy", "cathy/mode", "cathy.sh", "inject.sh", "hook.py",
                 "guard.sh", "guard.py", "cathy/guard", "cathy/rules"]
 
 

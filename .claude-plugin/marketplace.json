@@ -8,7 +8,7 @@
     {
       "name": "cathy",
       "source": "./",
-      "description": "Foundation engineering principles plus a safety guard, with one /cathy:run on|off|status switch. Off by default."
+      "description": "Foundation principles plus a safety guard. The rules load on coding work. /cathy:run on|always|off|status. Off by default."
     }
   ]
 }

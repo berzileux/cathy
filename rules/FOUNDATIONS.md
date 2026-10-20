@@ -12,7 +12,8 @@ Authority order (highest first):
 If two principles conflict, the lower number wins. Security and correctness
 come before speed and elegance.
 
-Loaded by the cathy plugin when mode is on. Switch with /cathy:run on or /cathy:run off.
+Loaded by the cathy plugin. Mode on: once, on a coding keyword or the first edit of a code file.
+Mode always: at every session start. Switch with /cathy:run on|always|off.
 Without the plugin, import with @FOUNDATIONS.md.
 
 Style: rules follow OUTPUT_STYLE.md. Reasons and risk notes use normal precise prose.

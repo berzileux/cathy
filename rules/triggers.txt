@@ -1,0 +1,35 @@
+# One regular expression per line. Case-insensitive. Lines that start with # are comments.
+# A prompt that matches any line loads the foundation rules (mode "on").
+\bcod(e|ing)\b
+\bimplement
+\brefactor
+\bfunctions?\b
+\bclass(es)?\b
+\bmethods?\b
+\bendpoints?\b
+\bapi\b
+\bmigrat
+\bschema\b
+\bsql\b
+\bquer(y|ies)\b
+\bunit tests?\b
+\btests?\b
+\bcompile
+\bbuild\b
+\bdeploy
+\bpipeline
+\bdockerfile
+\bcommit
+\bpull request
+\bmerge\b
+\bpatch\b
+\bfix(es|ed)?\b
+\bfeature\b
+\bscript\b
+\bmodule\b
+\bhandler\b
+\bcontroller\b
+\bservice\b
+\bcomponent\b
+\bbugs?\b
+\bdebug
