@@ -21,20 +21,20 @@ case "$cmd" in
   on)
     mkdir -p "$STATE_DIR"
     printf 'on\n' > "$STATE_FILE"
-    echo "CATHY ON. Apply the foundation rules below for this session. WAR_ROOM specs and SOUL decisions override them. Turn off with /cathy off."
+    echo "CATHY ON. Apply the foundation rules below for this session. WAR_ROOM specs and SOUL decisions override them. Turn off with /cathy:run off."
     echo
     cat "$RULES"
     ;;
   off)
     mkdir -p "$STATE_DIR"
     printf 'off\n' > "$STATE_FILE"
-    echo "CATHY OFF. Stop applying the foundation rules and the Foundations report block for the rest of this session. Turn on with /cathy on."
+    echo "CATHY OFF. Stop applying the foundation rules and the Foundations report block for the rest of this session. Turn on with /cathy:run on."
     ;;
   status)
     echo "Cathy mode: $(current_mode)"
     ;;
   *)
-    echo "Usage: /cathy on|off|status" >&2
+    echo "Usage: /cathy:run on|off|status" >&2
     exit 2
     ;;
 esac

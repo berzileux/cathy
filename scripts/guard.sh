@@ -15,7 +15,7 @@ mode="$(cat "$STATE_FILE" 2>/dev/null || true)"
 
 # Mode on: python3 does the checks. Without it, block. Exit code 2 means block.
 if ! command -v python3 >/dev/null 2>&1; then
-  echo "CATHY GUARD blocked this action: python3 is missing, so the guard cannot check it. Ask the human to install python3 or run /cathy off." >&2
+  echo "CATHY GUARD blocked this action: python3 is missing, so the guard cannot check it. Ask the human to install python3 or run /cathy:run off." >&2
   exit 2
 fi
 

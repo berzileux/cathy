@@ -12,7 +12,7 @@ Authority order (highest first):
 If two principles conflict, the lower number wins. Security and correctness
 come before speed and elegance.
 
-Loaded by the cathy plugin when mode is on. Switch with /cathy on or /cathy off.
+Loaded by the cathy plugin when mode is on. Switch with /cathy:run on or /cathy:run off.
 Without the plugin, import with @FOUNDATIONS.md.
 
 Style: rules follow OUTPUT_STYLE.md. Reasons and risk notes use normal precise prose.

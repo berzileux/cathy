@@ -11,7 +11,7 @@ mode="$(cat "$STATE_FILE" 2>/dev/null || true)"
 [ -n "$mode" ] || mode="${CATHY_DEFAULT_MODE:-off}"
 
 if [ "$mode" = "on" ] && [ -f "$RULES" ]; then
-  echo "CATHY ON. Apply the foundation rules below for this session. WAR_ROOM specs and SOUL decisions override them. Turn off with /cathy off."
+  echo "CATHY ON. Apply the foundation rules below for this session. WAR_ROOM specs and SOUL decisions override them. Turn off with /cathy:run off."
   echo
   cat "$RULES"
 fi

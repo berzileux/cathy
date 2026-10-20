@@ -32,7 +32,7 @@ SELF_PROTECT = [".config/cathy", "cathy/mode", "cathy.sh", "inject.sh",
 def block(why):
     sys.stderr.write(
         "CATHY GUARD blocked this action: %s\n"
-        "Do not look for a way around this. Ask the human to run /cathy off "
+        "Do not look for a way around this. Ask the human to run /cathy:run off "
         "if the action is really needed.\n" % why
     )
     sys.exit(2)

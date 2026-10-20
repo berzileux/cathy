@@ -1,7 +1,7 @@
 {
   "name": "cathy",
-  "description": "Foundation engineering principles plus a safety guard, with one /cathy on|off|status switch. Off by default.",
-  "version": "0.2.0",
+  "description": "Foundation engineering principles plus a safety guard, with one /cathy:run on|off|status switch. Off by default.",
+  "version": "0.3.0",
   "author": {
     "name": "berzileux"
   },

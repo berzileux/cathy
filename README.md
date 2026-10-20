@@ -5,8 +5,8 @@ with one switch. Off by default.
 
 One switch controls both parts:
 
-- `/cathy on`: the rules apply and the guard enforces.
-- `/cathy off`: no rules and no guard.
+- `/cathy:run on`: the rules apply and the guard enforces.
+- `/cathy:run off`: no rules and no guard.
 
 Off means no protection. Use it only when you are present and need an action
 that the guard blocks.
@@ -22,13 +22,13 @@ Restart the session after installing so the hooks load.
 
 ## Use
 
-    /cathy on        turn on the rules and the guard
-    /cathy off       turn off the rules and the guard
-    /cathy status    show the current mode
+    /cathy:run on        turn on the rules and the guard
+    /cathy:run off       turn off the rules and the guard
+    /cathy:run status    show the current mode
 
-The full name `/cathy:cathy on` is tested and works. The short form
-`/cathy on` did not resolve in a headless test, so confirm it in an
-interactive session. If it fails, use the full name.
+The command is `/cathy:run`. Plugin commands carry the plugin name as a prefix, and
+autocomplete inserts it. Type the full name. Shorter forms such as `/cathy on` are not
+resolved by Claude Code itself. A model may guess them, so do not rely on them.
 
 ## The two parts
 
@@ -54,7 +54,7 @@ call while mode is on. It blocks the action before it runs.
   .ssh, .aws, .kube, Claude settings and plugins, and Cathy's own state folder.
 - Self-protection: while mode is on, the agent cannot run the switch script,
   edit the mode file, or edit the guard files. Only you can switch it off,
-  with `/cathy off`.
+  with `/cathy:run off`.
 - Fail closed: if python3 is missing or the hook input cannot be read while
   mode is on, the action is blocked.
 
@@ -63,12 +63,12 @@ with # are comments.
 
 ## How it works
 
-- `/cathy on` writes `on` to `~/.config/cathy/mode` (or `$XDG_CONFIG_HOME/cathy/mode`)
+- `/cathy:run on` writes `on` to `~/.config/cathy/mode` (or `$XDG_CONFIG_HOME/cathy/mode`)
   and prints the rules into the conversation.
 - A SessionStart hook prints the rules at the start of each session
   (also after resume and compaction) when the mode is `on`.
 - A PreToolUse hook runs the guard. When the mode is `off`, it allows everything.
-- `/cathy off` writes `off` and tells Claude to stop applying the rules.
+- `/cathy:run off` writes `off` and tells Claude to stop applying the rules.
 
 Set `CATHY_DEFAULT_MODE=on` to change the default when no mode file exists.
 The default is `off`.
@@ -79,14 +79,14 @@ Tested with the claude CLI, `--plugin-dir`, and permissions skipped:
 
 - Mode off: `git add` runs.
 - Mode on: `git add` is blocked and nothing is staged.
-- `/cathy:cathy off` still works for the human while the guard is on.
+- `/cathy:run off` still works for the human while the guard is on.
 - Mode on: the agent cannot run the switch script, cannot overwrite the mode
   file with the Write tool, cannot write `.env` with Write or with a shell
   redirect. A normal file write and `git status` still work.
 - 69 unit cases for the guard script pass.
 
 Not tested: install through `/plugin marketplace add`, refresh from a GitHub
-marketplace, the short form `/cathy on`, Windows, and any shell other than bash.
+marketplace, Windows, and any shell other than bash.
 
 ## Limits
 
@@ -99,7 +99,7 @@ marketplace, the short form `/cathy on`, Windows, and any shell other than bash.
   production credentials.
 - `.env.*` is protected, so `.env.example` is blocked too. Edit
   `guard/protected-paths.txt` if you want to allow it.
-- Text already loaded into a conversation cannot be removed. `/cathy off` stops
+- Text already loaded into a conversation cannot be removed. `/cathy:run off` stops
   the rules by instruction. The text is gone in the next session.
 - The mode file is per machine and shared by all sessions on that machine.
 - The scripts need bash and python3. Windows needs WSL or Git Bash.
@@ -145,7 +145,7 @@ scripts with your user rights at every session start and tool call.
       marketplace.json
       plugin.json
     commands/
-      cathy.md
+      run.md
     hooks/
       hooks.json
     scripts/
