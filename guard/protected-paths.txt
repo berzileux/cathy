@@ -1,0 +1,23 @@
+# Cathy guard: files that Claude must not write or edit.
+# Active only when Cathy mode is on. Applies to the Write, Edit, MultiEdit
+# and NotebookEdit tools.
+#
+# Each line is a shell-style pattern matched against the full path.
+# Empty lines and lines that start with # are ignored.
+
+# Secrets and credentials.
+*/.env
+*/.env.*
+*/.ssh/*
+*/.aws/*
+*/.kube/*
+*/.gnupg/*
+*/.netrc
+
+# Claude settings and plugins. A changed setting can remove a guard.
+*/.claude/settings.json
+*/.claude/settings.local.json
+*/.claude/plugins/*
+
+# Cathy's own switch and files.
+*/.config/cathy/*

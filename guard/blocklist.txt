@@ -1,0 +1,41 @@
+# Cathy guard: blocked commands.
+# Active only when Cathy mode is on.
+#
+# Each line is one pattern. The guard blocks a command that contains these
+# words in this order. Other words may sit between them (for example flags).
+# For git, the first word after the git options is the subcommand.
+# Empty lines and lines that start with # are ignored.
+# Edit this list to fit your work. Add a line to block. Delete a line to allow.
+
+# Git: do not stage, commit, or send code.
+git add
+git commit
+git push
+git reset --hard
+git clean
+git config
+git rebase
+
+# Publish: do not release or post from a session.
+npm publish
+docker push
+gh pr create
+gh pr comment
+gh pr merge
+gh issue create
+gh issue comment
+
+# Infrastructure: do not change live systems.
+kubectl apply
+kubectl delete
+kubectl replace
+kubectl patch
+helm install
+helm upgrade
+helm uninstall
+terraform apply
+terraform destroy
+aws s3 rm
+aws s3 rb
+aws ec2 terminate-instances
+aws eks delete-cluster

@@ -1,0 +1,9 @@
+{
+  "name": "cathy",
+  "description": "Foundation engineering principles plus a safety guard, with one /cathy on|off|status switch. Off by default.",
+  "version": "0.2.0",
+  "author": {
+    "name": "berzileux"
+  },
+  "repository": "https://github.com/berzileux/cathy"
+}
