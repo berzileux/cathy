@@ -199,6 +199,60 @@ session start or after `/reload-plugins`. You do not need the update commands.
 Before you pull a change onto another machine, read the diff. The hooks run
 scripts with your user rights at every session start and tool call.
 
+## Testing a local copy
+
+If you installed the live market source, remove it first to avoid issues:
+
+    /plugin uninstall cathy@cathy
+    /plugin marketplace remove cathy
+
+Then add the local folder and install it. Use the absolute path of the folder that
+contains `.claude-plugin`:
+
+    /plugin marketplace add /abs/path/to/cathy
+    /plugin install cathy@cathy
+
+Restart the session after installing so the hooks load.
+
+`marketplace add` only registers the folder. You must still run the install command.
+
+While you develop from the local folder, you do not need to update, reinstall or
+raise the version. Edit the files, then start a new session, or run `/reload-plugins`
+in an open one.
+
+To go back to the GitHub copy, remove the local one with the two commands above,
+then follow the Install section. If you move or rename the folder, remove the
+local copy and add it again from the new path.
+
+When a release removes or renames a file, delete the old plugin folder before you
+unzip the new one. Unzipping over the old folder keeps the removed files. For
+example, an old `commands/cathy.md` keeps a second command `/cathy:cathy` alive, and
+an old `scripts/inject.sh` stays on disk.
+
+### Check that it works
+
+Run these in a scratch folder that is a git repo, not in a project you care about.
+
+1. Type `/ca`. Autocomplete should show `cathy:run` and no `cathy:cathy`.
+2. `/cathy:run status` should say the mode is off.
+3. `/cathy:run on`, then ask: "Run git add a.txt, then git status --short."
+   The guard should block `git add`, and `a.txt` should stay untracked.
+   The block message says "CATHY GUARD blocked this action".
+4. Keyword trigger. Start a new session and run `/cathy:run status` (it should say on).
+   Ask: "I need to implement a function. From your current instructions only, with no
+   file reads, what does rule P13 say?" The answer should describe the comment rule.
+   Then ask the same question without the keywords. In a new session, ask: "From your
+   current instructions only, with no file reads, what does rule P13 say? If you
+   do not have it, say: not loaded." The answer should be "not loaded".
+5. First-edit trigger. In a new session, write a file `task.md` that says "Create hello.py
+   that prints hello". Ask only: "Do what task.md says." Then ask the P13 question in
+   the same session. The answer should describe the comment rule.
+6. `/cathy:run off`, then `git add a.txt` should work.
+
+Steps 4 and 5 need a new session each time, because the rules load once per session.
+If a step fails, run `claude plugin list` and check the `Read from:` path, then
+`ls <that path>/commands` for stale files.
+
 ## Layout
 
     .claude-plugin/
